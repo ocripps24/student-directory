@@ -23,10 +23,12 @@ def print_header
 end
 
 def print(students)
-  students.each_with_index do |(key, value), student|
-    if key[:name].length < 12
-      puts "#{student + 1}. #{key[:name]} (#{key[:cohort]} cohort)"
+  counter = 0
+  until counter == students.length
+    if students[counter][:name].length < 12
+      puts "#{counter + 1}. #{students[counter][:name]} (#{students[counter][:cohort]} cohort)"
     end
+    counter += 1
   end
 end
 
