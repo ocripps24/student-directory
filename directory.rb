@@ -23,10 +23,8 @@ def print_header
 end
 
 def print(students)
-  student_count = 1
-  students.each do |student|
-    puts "#{student_count}. #{student[:name]} (#{student[:cohort]} cohort)"
-    student_count += 1 
+  students.each_with_index do |(key, value), student|
+    puts "#{student + 1}. #{key[:name]} (#{key[:cohort]} cohort)"
   end
 end
 
