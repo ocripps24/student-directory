@@ -24,7 +24,9 @@ end
 
 def print(students)
   students.each_with_index do |(key, value), student|
-    puts "#{student + 1}. #{key[:name]} (#{key[:cohort]} cohort)"
+    if key[:name].start_with? 'T'
+      puts "#{student + 1}. #{key[:name]} (#{key[:cohort]} cohort)"
+    end
   end
 end
 
