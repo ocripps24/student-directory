@@ -24,7 +24,7 @@ end
 
 def print(students)
   students.each_with_index do |(key, value), student|
-    if key[:name].start_with? 'T'
+    if key[:name].length < 12
       puts "#{student + 1}. #{key[:name]} (#{key[:cohort]} cohort)"
     end
   end
