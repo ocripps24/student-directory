@@ -58,6 +58,13 @@ def print(students)
   end
 end
 
+def print_by_cohort(students)
+  students.each do |student|
+    puts student[:cohort].to_s + " cohort"
+    puts student[:name].to_s
+  end
+end
+
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
@@ -66,3 +73,4 @@ students = input_students
 print_header
 print(students)
 print_footer(students)
+print_by_cohort(students)
