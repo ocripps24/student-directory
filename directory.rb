@@ -1,3 +1,30 @@
+def interactive_menu
+  students = []
+  loop do
+    # 1. print the menu and ask the user what to do
+    puts "1. Input the students"
+    puts "2. Show the students"
+    puts "9. Exit"
+    # 2. read the input and save it into a variable
+    selection = gets.chomp
+    # 3. do what the user has asked
+    case selection
+      when "1"
+        # input the students
+        students = input_students
+      when "2"
+        # show the students
+        print_header
+        print(students)
+        print_footer(students)
+      when "9"
+        exit # this will cause the program to terminate
+      else
+        puts "I don't know what you meant, try again"
+      end
+  end
+end
+
 def input_students
   # Ask for user input
   puts "Please enter the names of the students"
@@ -11,10 +38,7 @@ def input_students
     # Add the student hash to the array
     students << {
       name: name,
-      cohort: valid_cohort?(get_cohort),
-      hobbies: :mischief,
-      birth_place: :evilland,
-      height: :"180cm"
+      cohort: valid_cohort?(get_cohort)
     }
     if students.count == 1
       puts "Now we have #{students.count} student"
@@ -28,7 +52,7 @@ def input_students
     return students
   else
     return input_students
-  end 
+  end
 end
 
 def get_cohort
@@ -42,7 +66,7 @@ def valid_cohort?(cohort)
     :jul, :aug, :sep, :oct, :nov, :dec
   ]
   if cohort.empty?
-    return "november"
+    return "nov"
   elsif cohort_options.include?(cohort)
     return cohort
   else
@@ -60,7 +84,7 @@ def print(students)
   counter = 0
   until counter == students.length
     if students[counter][:name].length < 12
-      puts "#{counter + 1}. #{students[counter][:name]} (#{students[counter][:cohort]} cohort) hobby: #{students[counter][:hobbies]}, birthplace: #{students[counter][:birth_place]}, height: #{students[counter][:height]}".center(100)
+      puts "#{counter + 1}. #{students[counter][:name]} (#{students[counter][:cohort]} cohort)"
     end
     counter += 1
   end
@@ -76,8 +100,6 @@ def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
 # nothing happens until we call the methods
-students = input_students
-print_header
-print(students)
-print_footer(students)
-print_by_cohort(students)
+
+
+interactive_menu
