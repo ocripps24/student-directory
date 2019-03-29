@@ -5,7 +5,7 @@ def input_students
   # Make the array to store the input
   students = []
   # Get the first name
-  name = gets.gsub("/n", "")
+  name = gets.chomp
   # Until the name is empty, repeat this code
   until name.empty? do
     # Add the student hash to the array
@@ -16,20 +16,24 @@ def input_students
       birth_place: :evilland,
       height: :"180cm"
     }
-      if students.count == 1
-        puts "Now we have #{students.count} student"
-      else
-        puts "Now we have #{students.count} students"
-      end
+    if students.count == 1
+      puts "Now we have #{students.count} student"
+    else
+      puts "Now we have #{students.count} students"
+    end
     # get another name from the user
-    name = gets.gsub("/n", "")
+    name = gets.chomp
   end
-  students
+  if !students.empty?
+    return students
+  else
+    return input_students
+  end 
 end
 
 def get_cohort
   puts "Please enter the student's cohort as a 3 letter month entry: "
-  cohort = gets.gsub("/n", "").to_sym
+  cohort = gets.chomp.to_sym
 end
 
 def valid_cohort?(cohort)
@@ -64,7 +68,7 @@ end
 
 def print_by_cohort(students)
   puts "which cohort to print?"
-  cohort_input = gets.gsub("/n", "").to_sym
+  cohort_input = gets.chomp.to_sym
   students.map { |student| puts "#{student[:name]} (#{student[:cohort]} cohort)" if student[:cohort] == cohort_input }
 end
 
