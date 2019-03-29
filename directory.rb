@@ -16,7 +16,11 @@ def input_students
       birth_place: :evilland,
       height: :"180cm"
     }
-    puts "Now we have #{students.count} students"
+      if students.count == 1
+        puts "Now we have #{students.count} student"
+      else
+        puts "Now we have #{students.count} students"
+      end
     # get another name from the user
     name = gets.chomp
   end
@@ -59,10 +63,9 @@ def print(students)
 end
 
 def print_by_cohort(students)
-  students.each do |student|
-    puts student[:cohort].to_s + " cohort"
-    puts student[:name].to_s
-  end
+  puts "which cohort to print?"
+  cohort_input = gets.chomp.to_sym
+  students.map { |student| puts "#{student[:name]} (#{student[:cohort]} cohort)" if student[:cohort] == cohort_input }
 end
 
 def print_footer(students)
