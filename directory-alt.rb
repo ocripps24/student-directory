@@ -111,26 +111,26 @@ def save_students
   # open the file for writing
   puts "Which file would you like to write to: "
   input_save_file = STDIN.gets.chomp
-  input_save_file.empty? ? file = File.open("students.csv", "w") : file = File.open(input_save_file, "w")
-  # iterate over the array of students
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+  input_save_file.empty? ? file = File.open("students.csv", "w") : file = File.open(input_save_file, "w") do |file|
+    # iterate over the array of students
+    @students.each do |student|
+      student_data = [student[:name], student[:cohort]]
+      csv_line = student_data.join(",")
+      file.puts csv_line
+    end
   end
-  file.close
   puts "save successful"
 end
 
 def load_students(filename = "students.csv")
   puts "which file would you like to open: "
   input_file = STDIN.gets.chomp
-  input_file.empty? ? file = File.open(filename, "r") : file = File.open(input_file, "r")
-  file.readlines.each do |line|
-  name, cohort = line.chomp.split(",")
-    @students << {name: name, cohort: cohort.to_sym}
+  input_file.empty? ? file = File.open(filename, "r") : file = File.open(input_file, "r") do |file|
+    file.readlines.each do |line|
+    name, cohort = line.chomp.split(",")
+      @students << {name: name, cohort: cohort.to_sym}
+    end
   end
-  file.close
   puts "load successful"
 end
 
